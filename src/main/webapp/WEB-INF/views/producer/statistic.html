@@ -1,0 +1,54 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Danh sách thống kê</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+    table th, table td {
+      text-align: center;
+    }
+    button a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2 class="text-center">Danh sách thống kê</h2>
+  <div class="mb-3">
+    <a th:href="@{/producers}" class="btn btn-info">Danh sách nhà sản xuất</a>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>STT</th>
+      <th>Tên nhà sản xuất</th>
+      <th>Số lượng xe bán được</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="statistic, count : ${statistics}">
+      <td th:text="${count.count}"></td>
+      <td th:text="${statistic.name}"></td>
+      <td th:text="${statistic.quantity}"></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between">
+    <a th:if="${statistics.hasPrevious()}" th:href="@{/producers/statistic(page=${statistics.number - 1})}" class="btn btn-primary">Previous</a>
+    <span><span th:text="${statistics.number+1}"></span>/<span th:text="${statistics.totalPages}"></span></span>
+    <a th:if="${statistics.hasNext()}" th:href="@{/producers/statistic(page=${statistics.number + 1})}" class="btn btn-primary">Next</a>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

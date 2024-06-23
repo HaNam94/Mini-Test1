@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Danh sách nhà sản xuất</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        table th, table td {
+            text-align: center;
+        }
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Danh sách nhà sản xuất</h2>
+    <div class="mb-3">
+        <a th:href="@{/cars}" class="btn btn-info">Danh sách xe</a>
+        <a th:href="@{/types}" class="btn btn-info">Danh sách kiểu xe</a>
+        <a th:href="@{/producers/statistic}" class="btn btn-info">Thống kê số xe bán được</a>
+        <a th:href="@{/producers/create}" class="btn btn-success">Thêm nhà sản xuất</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên nhà sản xuất</th>
+            <th colspan="2">Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="producer, count : ${producers}">
+            <td th:text="${count.count}"></td>
+            <td th:text="${producer.name}"></td>
+            <td><a th:href="@{/producers/update/{id}(id=${producer.id})}" class="btn btn-warning">Sửa</a></td>
+            <td><a th:href="@{/producers/delete/{id}(id=${producer.id})}" class="btn btn-danger">Xóa</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

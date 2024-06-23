@@ -1,0 +1,64 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thêm</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Thêm xe</h1>
+    <form action="" method="post" th:object="${car}" class="form-group">
+        <div class="form-group">
+            <label for="name">Tên xe</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Tên">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="code">Biển số</label>
+            <input type="text" id="code" th:field="*{code}" class="form-control" placeholder="Biển số">
+            <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="producer">Nhà sản xuất</label>
+            <select id="producer" th:field="*{producer.id}" class="form-control">
+                <option th:each="producer : ${producers}"
+                        th:value="${producer.id}"
+                        th:text="${producer.name}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="number" id="price" th:field="*{price}" class="form-control" placeholder="Giá">
+            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="type">Kiểu xe</label>
+            <select id="type" th:field="*{type.id}" class="form-control">
+                <option th:each="type : ${types}"
+                        th:value="${type.id}"
+                        th:text="${type.name}">
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+    </form>
+    <a href="/cars" class="btn btn-secondary mt-3">Trang chủ</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
